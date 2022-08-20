@@ -14,7 +14,7 @@ class ApiHomePage extends StatefulWidget {
 }
 
 class _ApiHomePageState extends State<ApiHomePage> {
-  List<Albums>? posts;
+  List<Problems>? posts;
   var isLoaded = false;
 
   @override
@@ -24,7 +24,7 @@ class _ApiHomePageState extends State<ApiHomePage> {
   }
 
     getData()async{
-     posts = await RemoteServices().getPosts();
+     posts = (await RemoteServices().getPosts()) as List<Problems>?;
      if(posts!= null){
       setState(() {
         isLoaded= true;
@@ -42,7 +42,7 @@ class _ApiHomePageState extends State<ApiHomePage> {
      
      body:Visibility(
       replacement: const Center(
-        child: CircularProgressIndicator(),
+       child: CircularProgressIndicator(),
        ),
       visible: isLoaded,
        child: ListView.builder(
@@ -66,7 +66,7 @@ class _ApiHomePageState extends State<ApiHomePage> {
                  child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(posts![index].title,
+                      Text(posts![index].problems.toString(),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -75,11 +75,11 @@ class _ApiHomePageState extends State<ApiHomePage> {
                       ),
                       ),
                     
-                     Text(posts![index].title,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                     //Text(posts![index].problems,
+                    //maxLines: 3,
+                    //overflow: TextOverflow.ellipsis,
                    
-                    ),
+                   // ),
                     ],
                   ),
                ),
